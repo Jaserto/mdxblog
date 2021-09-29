@@ -32,6 +32,9 @@ const StyledMain = styled.main`
     margin:150px 0 0 150px;
     color:white;
   }
+  h3{
+    font-size: 28px;
+  }
 
   .box{
     width:100px;

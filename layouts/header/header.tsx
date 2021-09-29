@@ -26,7 +26,7 @@ const Header: React.FC = () => {
           <a
             style={{ display: 'flex', alignItems: 'center', margin: '0px 20px 0px 160px'}}
           >
-            <span>home</span>
+            <span>Home</span>
           </a>
         </Link>
         <Link href={'/proyectos'}>
@@ -34,7 +34,7 @@ const Header: React.FC = () => {
             className="menu-item"
             style={{ display: 'flex', alignItems: 'center', margin: '0 20px'}}
           >
-            <span>proyectos</span>
+            <span>Proyectos</span>
           </a>
         </Link>
       <Link href={'/proyectos'}>
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
             className="menu-item"
             style={{ display: 'flex', alignItems: 'center', margin: '0 20px'}}
           >
-            <span>about</span>
+            <span>About</span>
           </a>
         </Link>
       {/* <LanguageSwitcher /> */}

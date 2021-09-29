@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
 
 export const LayoutWrapper = styled.div`
+font-family: 'Inter', sans-serif;
     width: 100vw;
     height:100vh;
     background-color:#12131E;

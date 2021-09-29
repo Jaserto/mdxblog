@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/inter": "^4.5.0",
     "@styled-system/theme-get": "^5.1.2",
     "gray-matter": "^4.0.3",
     "next": "11.1.2",
