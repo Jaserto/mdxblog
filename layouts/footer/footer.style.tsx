@@ -2,12 +2,13 @@ import styled, { keyframes } from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
 
 
-export const HeaderWrapper = styled.header`
+export const FooterWrapper = styled.header`
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   height: 130px;
 
