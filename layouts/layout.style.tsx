@@ -10,12 +10,14 @@ export const LayoutWrapper = styled.div`
   align-items: center;
     padding:0 80px;
     .container{
-    
      padding:30px;
-   
-     
     }
 
+    .box-post{
+      width:40%;
+      margin:150px 0 0 150px;
+      color:white;
+    }
     /* @media (max-width: 990px) {
     
       } */

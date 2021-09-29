@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
             <span>proyectos</span>
           </a>
         </Link>
-      <Link href={'/proyectos'}>
+      <Link href={'/about'}>
           <a
             className="menu-item"
             style={{ display: 'flex', alignItems: 'center', margin: '0 20px'}}

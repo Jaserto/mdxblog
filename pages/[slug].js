@@ -1,9 +1,14 @@
 import { MDXRemote } from 'next-mdx-remote'
 import { getFileBySlug, getFiles } from '../lib/mdx'
-
+import Layout from '../layouts/app-layout'
 
 export default function Post({ source, frontmatter }) {
-    return <MDXRemote {...source} />
+    return (
+    <Layout type="post" metadata={frontmatter}>
+        <MDXRemote {...source} />
+    </Layout>
+   
+    )
 }
 
 export async function getStaticProps( { params } ) {

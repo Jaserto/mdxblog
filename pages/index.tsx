@@ -29,7 +29,7 @@ const StyledMain = styled.main`
   flex-direction: column;
   .contenedor{
     width:100%;
-   margin-top:150px;
+    margin:150px 0 0 150px;
     color:white;
   }
 
