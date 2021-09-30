@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
           <p>© Javierserna.com - Todos los derechos reservados</p>
           <Link href={'/'}>
           <a
-            style={{ display: 'flex', alignItems: 'center', margin: '0px 20px 0px 160px'}}
+            style={{ display: 'flex', alignItems: 'center'}}
           >
             <span>home</span>
           </a>
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
         <Link href={'/proyectos'}>
           <a
             className="menu-item"
-            style={{ display: 'flex', alignItems: 'center', margin: '0 20px'}}
+            style={{ display: 'flex', alignItems: 'center'}}
           >
             <span>proyectos</span>
           </a>
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
       <Link href={'/about'}>
           <a
             className="menu-item"
-            style={{ display: 'flex', alignItems: 'center', margin: '0 20px'}}
+            style={{ display: 'flex', alignItems: 'center'} }
           >
             <span>about</span>
           </a>

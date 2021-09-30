@@ -24,7 +24,7 @@ const Header: React.FC = () => {
      
           <Link href={'/'}>
           <a
-            style={{ display: 'flex', alignItems: 'center', margin: '0px 20px 0px 160px'}}
+            style={{ display: 'flex', alignItems: 'center'}}
           >
             <span>Home</span>
           </a>
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
         <Link href={'/proyectos'}>
           <a
             className="menu-item"
-            style={{ display: 'flex', alignItems: 'center', margin: '0 20px'}}
+            style={{ display: 'flex', alignItems: 'center'}}
           >
             <span>Proyectos</span>
           </a>
@@ -40,7 +40,7 @@ const Header: React.FC = () => {
       <Link href={'/proyectos'}>
           <a
             className="menu-item"
-            style={{ display: 'flex', alignItems: 'center', margin: '0 20px'}}
+            style={{ display: 'flex', alignItems: 'center'}}
           >
             <span>About</span>
           </a>

@@ -8,6 +8,7 @@ export const Logo = () => {
         alt="serdev logo"
         layout="fixed"
         width={160}
+        loading='lazy'
         height={60}
   />
   );

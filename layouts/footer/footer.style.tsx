@@ -10,8 +10,8 @@ export const FooterWrapper = styled.header`
   bottom: 0;
   left: 0;
   height: 130px;
-
-  width: 100%;
+  width:100%;
+  border:1px solid red;
   color: white;
 
   .menu-item: {
