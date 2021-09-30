@@ -5,8 +5,10 @@ export const Logo = () => {
      
     <Image
         src="/assets/logo-png.png"
-        width="160px"
-        height="60px"
+        alt="serdev logo"
+        layout="fixed"
+        width={160}
+        height={60}
   />
   );
 };

@@ -8,17 +8,9 @@ export const HeaderWrapper = styled.header`
   font-size: 18px;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
   height: 130px;
-
-  width: 100%;
+  max-width:800px;
   color: white;
-
-  .menu-item: {
-  
-  }
 
   @media (min-width: 1600px) {
     

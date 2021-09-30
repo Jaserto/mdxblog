@@ -7,7 +7,6 @@ export const FooterWrapper = styled.header`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  position: fixed;
   bottom: 0;
   left: 0;
   height: 130px;

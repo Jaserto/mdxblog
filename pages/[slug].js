@@ -1,12 +1,16 @@
 import { MDXRemote } from 'next-mdx-remote'
 import { getFileBySlug, getFiles } from '../lib/mdx'
 import Layout from '../layouts/app-layout'
+import { PostLayout } from '../layouts/post-layout'
 
 export default function Post({ source, frontmatter }) {
     return (
-    <Layout type="post" metadata={frontmatter}>
+ /*    <Layout type="post" metadata={frontmatter}> */
+ <PostLayout>
         <MDXRemote {...source} />
-    </Layout>
+ </PostLayout>
+        
+    /* </Layout> */
    
     )
 }
