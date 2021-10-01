@@ -4,14 +4,14 @@ import { themeGet } from '@styled-system/theme-get';
 
 export const FooterWrapper = styled.header`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   bottom: 0;
   left: 0;
   height: 130px;
   width:100%;
-  border:1px solid red;
+  
   color: white;
 
   .menu-item: {

@@ -3,20 +3,25 @@ import { themeGet } from '@styled-system/theme-get';
 
 
 export const PostLayout = styled.div`
-  
- height:100%;
+  height:100%;
+  width: 100%;
   color: white;
- 
   display:flex;
   flex-direction: column;
   text-align:left;
   line-height: 1.7;
-  background-color:#12131E;
+  background-color:#0F0E1E;
   max-width: 800px;
-  img{
-      max-width:450px;
+  padding: 0 25px;  
+  img{ 
+      display:flex; 
+      align-items:center;
+      justify-content:center;
+      width: 100%;
+      max-width:500px;
+      padding:  30px;  
   }
-/*   padding: 0 90px; */
+
   p{
     font-size: 18px;
   }

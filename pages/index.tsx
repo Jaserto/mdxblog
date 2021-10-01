@@ -16,28 +16,30 @@ type Post = {
   date?: string,
   content: string,
   descripcion?: string,
+  tags?: string,
 }
 
 const StyledDiv = styled.div`
-  
   width:100%;
-  max-width: 750px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow:hidden;
   color:white;
   flex-direction: column;
-  background-color:#12131E;
+  align-items: center;
+ 
   h3{
-    font-size: 28px;
+    font-size: 27px;
   }
-
+  h2{
+    font-size: 23px;
+  }
   
   .posts{
     margin-top:50px;
   }
-
 
   @media screen and (min-width: 1025px) {
     
@@ -50,7 +52,8 @@ const StyledDiv = styled.div`
 
 
 const Home: NextPage<Props> = ({posts}) => {
-  console.log(posts);
+//const tag = posts.tags.split(',');
+ // console.log(posts);
   return (
     <>
       <Head>
@@ -67,9 +70,67 @@ const Home: NextPage<Props> = ({posts}) => {
             <Link 
             key={post.slug} href={`/${post.slug}`}>
               <a className="box">
-                <h2>{post.title}</h2>
-                <p>{post.descripcion}</p>
-                           
+                <div style={{
+                  display: 'flex', 
+                  flexDirection:'column',
+                 marginBottom:'20px',
+                 
+                }}>
+
+                <div style={{
+                  display: 'flex', 
+                  flexDirection:'row',
+                  alignItems:'center',
+                 
+                 height:'43px'
+                }}>
+                  <h2>{post.title}</h2><span
+                  style={{
+                    display: 'flex', 
+                    flexDirection:'row',
+                    alignItems:'center',
+                    backgroundColor:'#900C3F',
+                    color:'#FFFFFF',
+                    borderRadius:'5px',
+                    justifyContent:'center',
+                    padding:'2px 7px',
+                    fontSize:'12px',
+                    marginLeft:'10px'
+                  }}>{post.date}</span>
+                
+                    
+                    {post.tags?.split(',').map(tag =>
+                    <span style={{
+                      display: 'flex', 
+                      flexDirection:'row',
+                      alignItems:'center',
+                      justifyContent:'center',
+                      backgroundColor:'#C9FFDC',
+                      color:'#444444',
+                      borderRadius:'5px',
+                      padding:'2px 7px',
+                      fontSize:'12px',
+                      marginLeft:'10px'
+                    }}>
+                      {tag}
+                    </span>
+                      )}
+                  
+                 
+                </div>
+                <div style={{
+                  display: 'flex', 
+                  flexDirection:'column',
+                  height:'25px'
+                }}>
+                     <p style={{
+                  margin:'0',
+                  padding:'0',
+                  fontSize:'15px',
+                  color:'#D3D3D3'
+                }}>{post.descripcion}</p>
+                    </div>
+                   </div>         
               </a>
           </Link>
          ))}
@@ -84,7 +145,7 @@ const Home: NextPage<Props> = ({posts}) => {
 
 export async function getStaticProps() {
   const posts = await getAllFilesMetadata();
-  console.log(posts)
+ // console.log(posts)
   return {
     props: { posts } 
   }

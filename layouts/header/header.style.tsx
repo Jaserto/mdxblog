@@ -3,7 +3,9 @@ import { themeGet } from '@styled-system/theme-get';
 
 
 export const HeaderWrapper = styled.header`
-border: 1px solid red;
+  display: flex;
+  width: 100%;
+  justify-content:space-between;
   display: flex;
   font-family: 'Inter', sans-serif;
   font-size: 18px;
@@ -11,13 +13,17 @@ border: 1px solid red;
   height: 130px;
   max-width:800px;
   color: white;
-  background-color:#12131E;
-  @media (max-width: 400px) {
-    width:100%;
-    border: 1px solid green;
+  @media (max-width: 540px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
-  
+  @media (max-width: 290px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 

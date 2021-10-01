@@ -16,10 +16,13 @@ const Footer: React.FC = () => {
  
   return (
     <FooterWrapper>
-          <p>© Javierserna.com - Todos los derechos reservados</p>
+      <div style={{
+        display: 'flex',
+       flexDirection: 'row'
+      }}>
           <Link href={'/'}>
           <a
-            style={{ display: 'flex', alignItems: 'center'}}
+            style={{ margin:'10px',display: 'flex', alignItems: 'center'}}
           >
             <span>home</span>
           </a>
@@ -27,7 +30,7 @@ const Footer: React.FC = () => {
         <Link href={'/proyectos'}>
           <a
             className="menu-item"
-            style={{ display: 'flex', alignItems: 'center'}}
+            style={{ margin:'10px',display: 'flex', alignItems: 'center'}}
           >
             <span>proyectos</span>
           </a>
@@ -35,13 +38,18 @@ const Footer: React.FC = () => {
       <Link href={'/about'}>
           <a
             className="menu-item"
-            style={{ display: 'flex', alignItems: 'center'} }
+            style={{ margin:'10px',display: 'flex', alignItems: 'center'} }
           >
             <span>about</span>
           </a>
         </Link>
       {/* <LanguageSwitcher /> */}
-
+</div>
+<p style={{
+  fontSize:'13px'
+}}>
+made with 🖤 ©javierserna.com 2021
+</p>
     </FooterWrapper>
   );
 };

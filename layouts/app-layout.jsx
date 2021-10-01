@@ -16,16 +16,7 @@ const Layout = ({children, type, metadata}) => {
   return (
     <LayoutWrapper>
      <Header />
-     {/*  <div className="container"> */}
-     {isBlogTemplate ? (
-              <div className="box-post">
-                <h1 className="titulo">
-                  {metadata.title}
-                </h1>
-                {children}
-              </div>
-            ) :
-             children }
+             {children }
     <Footer />
     </LayoutWrapper>
      
