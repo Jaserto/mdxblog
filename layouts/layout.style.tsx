@@ -11,10 +11,11 @@ export const LayoutWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 0 90px;
- 
-    .container{
-      padding:0 30px;
-   width:100vw;
+    @media (max-width: 830px) {
+
+      margin:0;
+      padding: 0 30px;
     }
+   
    
 `;

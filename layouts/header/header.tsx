@@ -21,7 +21,7 @@ const Header: React.FC = () => {
             <Logo />
           </a>
         </Link>
-     
+     <div className="menu">
           <Link href={'/'}>
           <a
             style={{ display: 'flex', alignItems: 'center', marginLeft: '45px'}}
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
             <span>Proyectos</span>
           </a>
         </Link>
-      <Link href={'/proyectos'}>
+      <Link href={'/about'}>
           <a
             className="menu-item"
             style={{ display: 'flex', alignItems: 'center'}}
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
           </a>
         </Link>
       {/* <LanguageSwitcher /> */}
-
+</div>
     </HeaderWrapper>
   );
 };

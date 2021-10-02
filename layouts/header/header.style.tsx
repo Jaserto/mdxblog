@@ -18,12 +18,32 @@ export const HeaderWrapper = styled.header`
     flex-direction: column;
     width: 100%;
   }
-
-  @media (max-width: 290px) {
+  @media (max-width: 830px) {
+    a{
+      display:flex;
+  
+    }
+    .menu{
+     /*  border:1px solid red; */
+      margin:0;
+      display:flex;
+      padding:0 10px;
+    }
+    align-items: center;
+    justify-content: center;
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin:0;
+    padding: 0 30px;
   }
+
+ /*  @media (max-width: 290px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  } */
 `;
 
 

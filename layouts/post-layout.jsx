@@ -9,6 +9,7 @@ export const PostLayout = styled.div`
   display:flex;
   flex-direction: column;
   text-align:left;
+  align-items:center;
   line-height: 1.7;
   background-color:#0F0E1E;
   max-width: 800px;
@@ -19,7 +20,7 @@ export const PostLayout = styled.div`
       justify-content:center;
       width: 100%;
       max-width:500px;
-      padding:  30px;  
+      padding:30px;  
   }
 
   p{

@@ -29,20 +29,78 @@ const StyledDiv = styled.div`
   color:white;
   flex-direction: column;
   align-items: center;
- 
+  
+  .div{
+    display:flex;
+    flex-direction: row;
+
+ }
+ .div2{
+  display:flex;
+  flex-direction: column;
+}
+.tags{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  }
+.tag2{
+  color:#444444;
+  border-radius:5px;
+  padding:1px 7px;
+  font-size:12px;
+  background-color:#C9FFDC;
+  margin: 0 7px;
+}
+.tag1{
+    background-color:#900C3F;
+    color:white;
+    border-radius:5px;
+    padding:2px 7px;
+    font-size:12px;
+    margin: 0px 0px 0px 20px;
+}
   h3{
     font-size: 27px;
   }
   h2{
     font-size: 23px;
   }
+ 
   
   .posts{
     margin-top:50px;
   }
 
-  @media screen and (min-width: 1025px) {
-    
+  @media screen and (max-width: 810px) {
+    .div{
+    display: flex;
+    flex-direction: column;
+   
+    }
+    .div2{
+      display: flex;
+      flex-direction: column;
+    }
+    .tags{
+    display: flex;
+    flex-direction: row;
+    margin-bottom:10px;
+    }
+    .tag1{
+      margin: 0;
+    }
+    h2{
+      margin:30px 20px 13px 0px;
+    }
+    h2:first-child{
+      margin:30px 20px 13px 0px;
+    }
+    .posts{
+      display: flex;
+      flex-direction: column;
+      margin:0
+    }
   }
   @media screen and (min-width: 1280px) {
 
@@ -70,52 +128,20 @@ const Home: NextPage<Props> = ({posts}) => {
             <Link 
             key={post.slug} href={`/${post.slug}`}>
               <a className="box">
-                <div style={{
-                  display: 'flex', 
-                  flexDirection:'column',
-                 marginBottom:'20px',
-                 
-                }}>
+                <div className="div2">
 
-                <div style={{
-                  display: 'flex', 
-                  flexDirection:'row',
-                  alignItems:'center',
-                 
-                 height:'43px'
-                }}>
-                  <h2>{post.title}</h2><span
-                  style={{
-                    display: 'flex', 
-                    flexDirection:'row',
-                    alignItems:'center',
-                    backgroundColor:'#900C3F',
-                    color:'#FFFFFF',
-                    borderRadius:'5px',
-                    justifyContent:'center',
-                    padding:'2px 7px',
-                    fontSize:'12px',
-                    marginLeft:'10px'
-                  }}>{post.date}</span>
+                <div className="div" >
+                  <h2>{post.title}</h2>
+                  <div className="tags">
+                  <span className="tag1">{post.date}</span>
                 
-                    
+               
                     {post.tags?.split(',').map(tag =>
-                    <span style={{
-                      display: 'flex', 
-                      flexDirection:'row',
-                      alignItems:'center',
-                      justifyContent:'center',
-                      backgroundColor:'#C9FFDC',
-                      color:'#444444',
-                      borderRadius:'5px',
-                      padding:'2px 7px',
-                      fontSize:'12px',
-                      marginLeft:'10px'
-                    }}>
+                    <span className="tag2">
                       {tag}
                     </span>
                       )}
-                  
+                  </div>
                  
                 </div>
                 <div style={{
