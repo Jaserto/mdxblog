@@ -87,7 +87,17 @@ const StyledDiv = styled.div`
     margin-bottom:10px;
     }
     .tag1{
+      font-size:11px;
       margin: 0;
+      padding:1px 3px;
+    }
+    .tag2{
+      color:#444444;
+      border-radius:5px;
+      padding:1px 3px;
+      font-size:11px;
+      background-color:#C9FFDC;
+      margin: 0 3px;
     }
     h2{
       margin:30px 20px 13px 0px;

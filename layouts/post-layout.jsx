@@ -88,7 +88,7 @@ h1{
 }
 .tag1{
   padding:1px 3px;
-  margin:0
+  margin:0;
 }
 .tag2{
   padding:1px 3px;
