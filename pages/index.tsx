@@ -33,8 +33,8 @@ const StyledDiv = styled.div`
   .div{
     display:flex;
     flex-direction: row;
-
  }
+
  .div2{
   display:flex;
   flex-direction: column;
@@ -67,7 +67,6 @@ const StyledDiv = styled.div`
     font-size: 23px;
   }
  
-  
   .posts{
     margin-top:50px;
   }
@@ -76,8 +75,8 @@ const StyledDiv = styled.div`
     .div{
     display: flex;
     flex-direction: column;
-   
     }
+
     .div2{
       display: flex;
       flex-direction: column;
@@ -137,7 +136,8 @@ const Home: NextPage<Props> = ({posts}) => {
                 
                
                     {post.tags?.split(',').map(tag =>
-                    <span className="tag2">
+                    
+                    <span key={tag} className="tag2">
                       {tag}
                     </span>
                       )}

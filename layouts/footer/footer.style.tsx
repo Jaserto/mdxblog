@@ -11,12 +11,7 @@ export const FooterWrapper = styled.header`
   left: 0;
   height: 130px;
   width:100%;
-  
   color: white;
-
-  .menu-item: {
-  
-  }
 
   @media (min-width: 1600px) {
     

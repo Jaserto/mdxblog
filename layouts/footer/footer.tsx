@@ -16,6 +16,7 @@ const Footer: React.FC = () => {
  
   return (
     <FooterWrapper>
+      <hr style={{width: '100%', marginTop: '10px'}}/>
       <div style={{
         display: 'flex',
        flexDirection: 'row'
@@ -48,7 +49,7 @@ const Footer: React.FC = () => {
 <p style={{
   fontSize:'13px'
 }}>
-made with 🖤 ©javierserna.com 2021
+made with ❤️ © javierserna.com 2021
 </p>
     </FooterWrapper>
   );

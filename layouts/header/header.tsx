@@ -17,14 +17,14 @@ const Header: React.FC = () => {
   return (
     <HeaderWrapper id="layout-header">
       <Link href={'/'}>
-          <a   style={{ display: 'flex', alignItems: 'center', marginRight: '45px'}}>
+          <a className="logo" style={{ display: 'flex', alignItems: 'center'}}>
             <Logo />
           </a>
         </Link>
      <div className="menu">
           <Link href={'/'}>
           <a
-            style={{ display: 'flex', alignItems: 'center', marginLeft: '45px'}}
+            style={{ display: 'flex', alignItems: 'center'}}
           >
             <span>Home</span>
           </a>
