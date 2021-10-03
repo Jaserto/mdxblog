@@ -15,9 +15,7 @@ export const HeaderWrapper = styled.header`
   height: 130px;
   max-width:800px;
   color: white;
-  .logo{
-    margin-right:45px;
-  }
+  padding: 0 30px;
   .menu{
     display: flex;
     flex-direction:row;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import "@fontsource/inter"
 
 export const LayoutWrapper = styled.div`
     font-family: 'Inter', sans-serif;

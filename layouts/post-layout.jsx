@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
+import "@fontsource/inter"
 
 
 export const PostLayout = styled.div`
@@ -12,7 +13,8 @@ export const PostLayout = styled.div`
   align-items:center;
   line-height: 1.7;
   max-width: 800px;
-  padding: 0 25px;  
+  padding: 0 25px; 
+  font-family: "Inter"; 
   img{ 
       display:flex; 
       flex:1;
