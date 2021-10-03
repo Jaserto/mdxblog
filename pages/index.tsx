@@ -33,9 +33,11 @@ const StyledDiv = styled.div`
   .div{
     display:flex;
     flex-direction: row;
+    height:55px;
  }
 
  .div2{
+  margin-top:20px;
   display:flex;
   flex-direction: column;
 }
@@ -75,10 +77,12 @@ const StyledDiv = styled.div`
     .div{
     display: flex;
     flex-direction: column;
+    height:100%;
     }
 
     .div2{
       display: flex;
+   
       flex-direction: column;
     }
     .tags{
@@ -160,11 +164,12 @@ const Home: NextPage<Props> = ({posts}) => {
                   height:'25px'
                 }}>
                      <p style={{
-                  margin:'0',
-                  padding:'0',
-                  fontSize:'15px',
-                  color:'#D3D3D3'
-                }}>{post.descripcion}</p>
+                        margin:'0',
+                        padding:'0',
+                        fontSize:'15px',
+                        color:'#D3D3D3'
+                      }}>{post.descripcion}
+                    </p>
                     </div>
                    </div>         
               </a>
