@@ -60,7 +60,7 @@ export const PostLayout = styled.div`
     font-size: 40px;
   }
   p{
-    font-size:16px;
+    font-size:17px;
     font-weight: 400;
     line-height:1.75;
     color: #D8D8D8;
