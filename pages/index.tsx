@@ -34,6 +34,7 @@ const StyledDiv = styled.div`
     display:flex;
     flex-direction: row;
     height:55px;
+    align-items: center;
  }
 
  .div2{

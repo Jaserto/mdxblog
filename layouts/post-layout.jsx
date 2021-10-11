@@ -4,6 +4,7 @@ import "@fontsource/inter"
 
 
 export const PostLayout = styled.div`
+overflow:hidden;
   height:100%;
   width: 100%;
   color: white;
@@ -15,6 +16,11 @@ export const PostLayout = styled.div`
   max-width: 800px;
   padding: 0 25px; 
   font-family: "Inter"; 
+  article{
+    width: 100%;
+    margin:0;
+  
+  }
   img{ 
       display:flex; 
       flex:1;
@@ -53,7 +59,6 @@ export const PostLayout = styled.div`
       border-radius:5px;
       padding:2px 7px;
       font-size:12px;
-      margin: 0px 0px 0px 10px;
   }
 
   h1{
@@ -72,6 +77,7 @@ export const PostLayout = styled.div`
 article{
   width: 100%;
   margin:0;
+
 }
 h1{
   font-size: 20px;
@@ -98,6 +104,9 @@ h1{
 }
 img{
   width: 100%;
+}
+p{
+  
 }
    
 
