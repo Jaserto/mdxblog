@@ -1,0 +1,346 @@
+---
+title: 'Node.js desde dentro'
+date: '🗓️Octubre 12, 2021'
+tags: '⌨️ Desarrollo,💻Informatica'
+fecha: '2021-10-12'
+descripcion: 'Node.js por dentro, desde V8 y libuv hasta la threadpool.'
+---
+
+# Node.js por dentro
+
+Dos de las dependencias más importantes del proyecto NodeJS son V8 y libuv.
+
+V8 es un motor JavaScript de código abierto creado por Google. Su objetivo es ejecutar código JavaScript fuera del navegador.
+
+libuv es una librería C++ de código abierto que le da a NodeJS acceso al sistema de archivos del sistema operativo subyacente, a la red y a algunos aspectos de la concurrencia y más.
+```shell
+Código Javascriptque nosotros escribimos
+└── Node JS
+   └── V8
+   └── libuv
+```
+
+**¿Cuál es el propósito de NodeJS en lugar de las dependencias?**
+
+Algunas de las dependencias no son todas de JavaScript. V8 es ~70% C++ y libuv es 100% C++.
+
+La otra cosa que hace Node es establecer un conjunto consistente de envolturas, es decir, http, fs, path, crypto, etc., que son en su mayoría envolturas para el proyecto libuv.
+
+Al hacer uso de NodeJS, no tenemos que preocuparnos por el C++ subyacente.
+
+## Implementación de módulos
+
+Para entender esto, podemos
+
+Elegir una función en la biblioteca estándar de Node
+
+Encontrar dónde está implementada en el código fuente de Node
+
+Ver cómo se usan V8 y libuv para implementar esa función
+
+El ejemplo que usaremos aquí es pbkdf2, que es el nombre de un algoritmo de hashing que se encuentra dentro de la biblioteca 'crypto' de Nodejs.
+
+** ¿Cómo funciona la implementación?** Mirando en github.com, vemos que pasamos una **contraseña**, un **salt** y **otras opciones**.
+
+Al comprobar la cuenta de [Github de Nodejs](https://github.com/nodejs/node), podemos comprobar que **lib** es la parte JavaScript del proyecto, mientras que **src** es la implementación C++ de todas esas funciones - aquí es donde **Node** tira de **libuv**.
+
+Te darás cuenta de que la función ** pbkdf2**  de JavaScript devuelve **_pbkdf2**, que a su vez hace un montón de comprobaciones de errores hasta que llegas a un bloque de código que llama a **PBKDF2**. Esta función PBKDF2 es donde C++ maneja la función.
+
+Puedes ver que **PBKDF2** es requerido desde **process.binding('crypto')** - esa línea es donde la magia ocurre entre la unión de C++ con el JavaScript.
+
+```shell
+Código Javascript que escribimos
+
+└── Nodos lado JS (carpeta lib en repo)
+
+ └── process.binding() # conecta las funciones JS y C++
+
+   └── V8 # convierte los valores entre el mundo JS y C++
+
+      └── Nodos lado C++ (carpeta src en la repo)
+
+        └── libuv # da a Node fácil acceso al SO subyacente
+```
+
+## C++ en Node
+
+Dentro del directorio **.src** del proyecto Node en Github, podemos encontrar el archivo **.cc** equivalente a JS para el módulo **node_{module-name}.cc**.
+
+En el caso anterior, podríamos consultar **node_crypto.cc** para el módulo Crypto.
+
+## ¿Dónde entran en juego V8 y libuv?
+
+Dentro de los archivos **.cc**, verás mucho **uso de v8::{name}** donde **v8** nos permite importar la definición C++ de los conceptos de JavaScript.
+
+Es más difícil ver la presencia de **libuv**. Si buscas en **uv** encontrarás trabajos como **uv_work_t** donde **libuv** se usa mucho para la concurrencia.
+
+Ten en cuenta que hay mucha interopabilidad entre **v8**y el proyecto **libuv**.
+## Los fundamentos de Threads
+
+Cuando ejecutas algo en el ordenador, ejecutas un proceso.
+
+Dentro de un proceso, puedes tener múltiples cosas llamadas "hilos" que puedes considerar como una "lista de tareas" para que la CPU las complete.
+
+Un solo proceso puede tener múltiples hilos dentro de él. Puedes saber que esto es posible gracias a cosas como el Monitor de Actividad o **Activity Monitor** que te indica el número de procesos e hilos.
+
+La **programación** se refiere a la capacidad del SO de decidir qué hilo procesar en un momento dado. Esto se vuelve relevante con muchos procesos e hilos en ejecución.
+
+El **Programador del SO** se asegura de que los hilos no importantes no esperen demasiado tiempo.
+
+Hay estrategias para ayudar con el proceso de que estos **hilos** sean procesados.
+
+Un enfoque es la inclusión de más núcleos de CPU. Con más núcleos, podemos procesar múltiples hilos en paralelo.
+
+Nota: Técnicamente un núcleo puede procesar más de un hilo a la vez a través de un proceso conocido como **multithreading** (a veces llamado **hyperthreading**).
+
+Mientras un hilo está procesando y esperando una respuesta asíncrona, el programador del sistema operativo puede programar otro hilo para trabajar. Esto es importante para el event loop  de Nodejs.
+
+
+## El event loop de Nodejs
+
+El event loop  es utilizado por Node para manejar el código asíncrono escrito en nuestras aplicaciones.
+
+Cuando iniciamos un programa Node, Node crea automáticamente un hilo y ejecuta todo el código en ese hilo.
+
+El famoso **event loop** en sí mismo es como una estructura de control que le dice al hilo lo que debe hacer en cada momento.
+
+Cada programa que ejecutamos tiene exactamente un **event loop**. Es muy importante saber esto para entender cómo se comporta el programa, lo que a su vez nos ayudará con los problemas de rendimiento.
+
+Entenderlo no es fácil - pero es notoriamente difícil de entender.
+
+En lugar de ver diagramas complicados, escribiremos algo de pseudocódigo para emular el event loop.
+```javascript
+// nodo miArchivo.js
+const pendingTimers = [];
+const pendingOSTasks = [];
+const pendingOperations = [];
+
+// Los nuevos temporizadores, tareas y operaciones se registran a partir de la ejecución de myFile
+myFile.runContents();
+
+function shouldContinue() {
+  // El nodo hace tres comprobaciones
+
+  // Comprobación 1: ¿Hay algún registro de funciones con setTimeout, setInterval o setImmediate?
+
+  // Comprobación 2: Comprueba si hay alguna tarea pendiente del SO, por ejemplo, un servidor http escuchando peticiones en algún puerto
+
+  // Comprobación 3: ¿Hay alguna operación pendiente de larga duración que aún se esté ejecutando, por ejemplo, una llamada a una función dentro del módulo fs?
+
+  return pendingTimers.length || pendingOSTasks.length || pendingOperations.length;
+}
+
+// seudo imitación del bucle de eventos "tick" para cada iteración - ejecuta todo el cuerpo en un "tick"
+while(shouldContinue()) {
+  // 1) El nodo mira en pendingTimers y ve si hay alguna función lista para ser llamada (setTimeout, setInterval)
+
+  // 2) El nodo mira los pendingOSTasks y pendingOperations y llama a los callbacks relevantes
+
+  // 3) El nodo pausa la ejecución temporalmente y se sienta a esperar que ocurran nuevos eventos. Continúa cuando ...
+  // - se realice una nueva pendingOSTask
+  // - se realice una nueva pendingOperation
+  // - un temporizador esté a punto de completarse
+
+  // 4) El nodo vuelve a mirar los pendingTimers. (no se preocupa por setTimeout, setInterval - sólo setImmediate). Llama a cualquier setImmediate.
+
+  // 5) Maneja cualquier evento 'close' eg readStream.on('close', callback)
+}
+
+// salir de nuevo a la terminal
+
+```
+
+
+## ¿Es Node un solo hilo?
+
+**Event loop** de Node = monohilo
+
+Algunas partes de Node **Framework/Std Lib** = NO son de un solo hilo
+
+El **event loop** en sí mismo es realmente de un solo hilo. Esto es comúnmente visto como algo malo, ya que el event loop sólo puede ejecutarse en un núcleo de la CPU.
+
+Sin embargo, algunas de las funciones incluidas en la biblioteca estándar de Node no son de un solo hilo - se ejecutan fuera del event loop.
+
+Ejemplo:
+
+```javascript
+// thread.js
+
+const crypto = require('crypto');
+
+
+const start = Date.now();
+
+
+// nota las dos llamadas siguientes serán invocadas al mismo tiempo
+
+crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+
+  console.log('1:', Date.now() - start);
+
+});
+
+
+crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+
+  console.log('2:', Date.now() - start);
+
+});
+```
+
+Observa que el resultado que obtenemos es que algunos registros ocurren casi simultáneamente (pero con el doble de tiempo), donde hay una pausa antes de que lleguen otros resultados. Este es el propio pool de hilos en acción.
+
+
+## Cambiar el Threadpool Size
+
+```javascript
+// thread.js
+
+process.env.UV_THREADPOOL_SIZE = 2; // le dice a libuv que sólo cree dos hilos en el pool de hilos
+
+
+const crypto = require('crypto');
+
+
+const start = Date.now();
+
+
+// nota que las dos llamadas siguientes serán invocadas al mismo tiempo
+
+crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+
+  console.log('1:', Date.now() - start);
+
+});
+
+
+crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+
+  console.log('2:', Date.now() - start);
+
+});
+
+
+crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+
+  console.log('3:', Date.now() - start);
+
+});
+
+
+crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+
+  console.log('4:', Date.now() - start);
+
+});
+
+
+crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+
+  console.log('5:', Date.now() - start);
+
+});
+```
+
+Notarás que la sincronización ahora ocurre aún más rápido para las dos primeras llamadas. Personalizar el pool de hilos aquí ha funcionado a nuestro favor.
+
+Si hiciéramos esto usando el valor de **5**, notamos que las 5 llamadas se completan en un tiempo similar pero con un tiempo más largo para que todas vuelvan de la finalización.
+
+## Preguntas comunes sobre Threadpool
+¿Podemos utilizar el threadpool para código JS o sólo se puede utilizar con ciertas funciones de NodeJS? Podemos escribir código JS personalizado que utilice el threadpool.
+
+¿Qué funciones de la **node std lib** utilizan el threadpool? Todas las funciones del módulo FS, algunas cosas de criptografía. Depende del sistema operativo (basado en Windows o en Unix).
+
+¿Cómo encaja este threadpool en el event loop? Las tareas que se ejecutan en el threadpool son las **pendingOperations** en el ejemplo del pseudocódigo.
+
+## Explicación de las operaciones del SO + Delegación del SO de Libuv#.
+
+¿Qué son las **pendingOSTasks** de las que hablamos en el pseudocódigo?
+
+Lo explicaremos utilizando otro benchmark.
+
+```javascript
+// async.js
+const https = require('https');
+
+const start = Date.now();
+
+function doRequest() {
+  https.request('https://www.google.com', res => {
+     res.on('data', () => {});
+     res.on('end', () => {
+       console.log(Date.now() - start);
+     });
+   }).end();
+}
+
+doRequest();
+doRequest();
+doRequest();
+doRequest();
+doRequest();
+doRequest();
+```
+
+Parece como si todas las llamadas a **doRequest** se completaran casi al mismo tiempo - un comportamiento claramente diferente al del grupo de hilos dado que ejecutamos la petición seis veces.
+
+Lo que vemos aquí es más evidencia de **libuv** en juego, pero no es el pool de hilos. También tiene algunas funciones que hacen uso del sistema operativo subyacente.
+
+Ni **libuv** ni **node** tienen las operaciones para manejar la realización de peticiones. En realidad es el sistema operativo real el que hace la petición http. Debido a que el trabajo se delega en el sistema operativo, el sistema operativo decide si hacer un nuevo hilo o no. No estamos tocando el pool de hilos en absoluto en este caso.
+
+## Preguntas comunes del SO/Async#
+
+¿Qué funciones de la **node std lib** utilizan las características asíncronas del SO? Casi todo en torno a la red para todos los sistemas operativos. Algunas otras cosas son específicas del SO.
+
+¿Cómo encaja este sistema operativo asíncrono en el event loop? Las tareas que utilizan el SO subyacente se reflejan en nuestro array **pendingOSTasks**.
+
+## Comportamiento del Nodo Loco #
+
+```javascript
+// multitask.js
+const https = require('https');
+const crypto = require('crypto');
+const fs = require('fs');
+
+const start = Date.now();
+
+function doRequest() {
+  https.request('https://www.google.com', res => {
+     res.on('data', () => {});
+     res.on('end', () => {
+       console.log('HTTPS:', Date.now() - start);
+     });
+   }).end();
+}
+
+function doHash() {
+  crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+    console.log('Hash:', Date.now() - start);
+  });
+}
+
+doRequest();
+
+fs.readFile('multitask.js', 'utf8', () => {
+  console.log('FS:' Date.now() - start);
+});
+
+// se llama específicamente 4 veces
+doHash();
+doHash();
+doHash();
+doHash();
+```
+
+Nótese que la llamada **fs** exhibe un comportamiento realmente interesante. Dado el threadpool de **libuv** de 4, el scheduler del SO y el core threading.
+
+Las respuestas tienen que ver con los tiempos de pausa necesarios para la función **fs.readFile**.
+
+Dado el tamaño del pool de hilos, la llamada a **fs** se asignaría al hilo #1, mientras que las siguientes tres llamadas a **doHash** se asignarían a los otros hilos.
+
+El hilo #1 entonces carga la última llamada a **doHash** mientras el hilo #1 descarga el **fs.readFile** al disco duro hasta que la llamada de retorno se complete.
+
+Una vez que el hilo #2 termina el trabajo, comprueba si ha llegado alguna información del **disco duro** (que sí ha llegado), por lo que la función **fs.readFile** se completa. Nota: tiene un segundo callback de pausa, pero dado que el hilo de trabajo estaba libre, fue capaz de manejar la segunda respuesta directamente.
+
+Tenga en cuenta que la configuración de **process.env.UV_THREADPOOL_SIZE = 5;** permitiría a **fs** tener un hilo de reserva para completar rápidamente con las otras cuatro llamadas **doHash** terminando en un plazo de tiempo similar, mientras que **process.env.UV_THREADPOOL_SIZE = 1;** bloquearía la llamada **fs** de terminar hasta justo al final.
+

@@ -7,8 +7,8 @@ export const PostLayout = styled.div`
 overflow:hidden;
   height:100%;
   width: 100%;
-  color: white;
   display:flex;
+  font-size: 16px;
   flex-direction: column;
   text-align:left;
   align-items:center;
@@ -19,7 +19,9 @@ overflow:hidden;
   article{
     width: 100%;
     margin:0;
-  
+  }
+  strong{
+    color:white;
   }
   img{ 
       display:flex; 
@@ -63,12 +65,17 @@ overflow:hidden;
 
   h1{
     font-size: 40px;
+    color: #f3f3f3;
+  }
+  h2{
+    margin:40px 0 0 0;
+    color: #f3f3f3;
   }
   p{
-    font-size:17px;
+    color: #cfcfcf;
+    font-size:16px;
     font-weight: 400;
     line-height:1.75;
-    color: #D8D8D8;
     margin-bottom:20px;
   }
   
@@ -104,11 +111,7 @@ h1{
 }
 img{
   width: 100%;
-}
-p{
-  
-}
-   
+} 
 
   }
   
