@@ -21,7 +21,13 @@ overflow:hidden;
     margin:0;
   }
   strong{
+    font-size:14px;
+    font-weight: normal;
     color:white;
+    margin:0 2px;
+    border-radius:0.2em;
+    padding: 1px 2px;
+    background-color: #4c4c4c;
   }
   img{ 
       display:flex; 

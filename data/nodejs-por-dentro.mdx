@@ -6,21 +6,19 @@ fecha: '2021-10-12'
 descripcion: 'Node.js por dentro, desde V8 y libuv hasta la threadpool.'
 ---
 
-# Node.js por dentro
-
 Dos de las dependencias más importantes del proyecto NodeJS son V8 y libuv.
 
 V8 es un motor JavaScript de código abierto creado por Google. Su objetivo es ejecutar código JavaScript fuera del navegador.
 
 libuv es una librería C++ de código abierto que le da a NodeJS acceso al sistema de archivos del sistema operativo subyacente, a la red y a algunos aspectos de la concurrencia y más.
 ```shell
-Código Javascriptque nosotros escribimos
+Código Javascript que nosotros escribimos
 └── Node JS
    └── V8
    └── libuv
 ```
 
-**¿Cuál es el propósito de NodeJS en lugar de las dependencias?**
+## ¿Cuál es el propósito de NodeJS en lugar de las dependencias?
 
 Algunas de las dependencias no son todas de JavaScript. V8 es ~70% C++ y libuv es 100% C++.
 
@@ -40,7 +38,9 @@ Ver cómo se usan V8 y libuv para implementar esa función
 
 El ejemplo que usaremos aquí es pbkdf2, que es el nombre de un algoritmo de hashing que se encuentra dentro de la biblioteca 'crypto' de Nodejs.
 
-** ¿Cómo funciona la implementación?** Mirando en github.com, vemos que pasamos una **contraseña**, un **salt** y **otras opciones**.
+## ¿Cómo funciona la implementación? 
+
+Mirando en github.com, vemos que pasamos una **contraseña**, un **salt** y **otras opciones**.
 
 Al comprobar la cuenta de [Github de Nodejs](https://github.com/nodejs/node), podemos comprobar que **lib** es la parte JavaScript del proyecto, mientras que **src** es la implementación C++ de todas esas funciones - aquí es donde **Node** tira de **libuv**.
 
