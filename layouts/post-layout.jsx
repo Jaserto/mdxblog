@@ -72,8 +72,8 @@ overflow:hidden;
     color: #f3f3f3;
   }
   p{
-    color: #cfcfcf;
-    font-size:16px;
+    color: #eaeaea;
+    font-size:15px;
     font-weight: 400;
     line-height:1.75;
     margin-bottom:20px;
@@ -112,7 +112,9 @@ h1{
 img{
   width: 100%;
 } 
-
+p{
+  font-size:16px;
+}
   }
   
 `;

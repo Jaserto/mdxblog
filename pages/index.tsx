@@ -79,11 +79,11 @@ const StyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     height:100%;
+    align-items: start;
     }
 
     .div2{
       display: flex;
-   
       flex-direction: column;
     }
     .tags{
