@@ -1,7 +1,5 @@
-import { useMemo } from 'react';
 import { MDXRemote } from 'next-mdx-remote'
 import { getFileBySlug, getFiles } from '../lib/mdx'
-import Layout from '../layouts/app-layout'
 import { PostLayout } from '../layouts/post-layout'
 
 export default function Post({ source, frontmatter }) {
