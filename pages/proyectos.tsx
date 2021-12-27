@@ -7,7 +7,7 @@ import { LayoutWrapper } from '../layouts/layout.style';
 
 
 const StyledDiv = styled.div`
-  width:50%;
+  width:60%;
   display: flex;
   flex-direction: column;
   overflow:hidden;
@@ -62,11 +62,30 @@ const StyledDiv = styled.div`
       display: flex;
       flex-direction: column;
       height:100%;
-      align-items: start;
+      align-items: center;
     }
-
+    .boton{
+      margin-bottom:30px;
+      width:100%; 
+    }
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (max-width: 600px) {
+    width:100%;
+    .div{
+      display: flex;
+      flex-direction: column;
+      height:100%;
+      align-items: center;
+    
+    }
+   
+    img{
+      width:50%;
+    }
+    .boton{
+      margin-bottom:30px;
+      width:100%; 
+    }
 
   }
 `;

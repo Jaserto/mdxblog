@@ -5,7 +5,7 @@ export const LayoutWrapper = styled.div`
     font-family: 'Inter', sans-serif;
     width: 100%; 
     height: 100%;
-     background-color:#080911; 
+    background-color:#080911; 
    /*  #12131E */
     display:flex;
     flex-direction: column;
@@ -16,6 +16,9 @@ export const LayoutWrapper = styled.div`
       margin:0;
       padding: 0 30px;
     }
-   
+    @media screen and (max-width: 400px) {
+      padding: 0;
+  
+    }
    
 `;
